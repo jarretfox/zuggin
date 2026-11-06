@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Zuggin guild hall. A new Zug Zug copypasta every day.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Zuggin Guild Hall</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Metamorphous&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Layout: a single column. A blood-red banner holds the guild name, and below it the day's pasta sits in an in-game guild chat frame. */
+:root {
+  --bg: #ece2cc;
+  --surface: #f6efdf;
+  --fg: #2a1f17;
+  --muted: #6f5d4c;
+  --line: #cdb995;
+  --accent: #8d1b1b;
+  --accent-fg: #fff6ea;
+  --ember: #a8551a;
+  --chat-bg: #120e0b;
+  --chat-edge: #5b4a33;
+  --guild-green: #40ff40;
+  --chat-dim: #9c8f7a;
+  --display: 'Metamorphous', 'Georgia', 'Times New Roman', serif;
+  --body: 'Alegreya Sans', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --chat: 'Alegreya Sans', 'Arial Narrow', 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15110e; --surface: #211a15; --fg: #efe3cf; --muted: #ab9780; --line: #3f3128;
+    --accent: #a32622; --accent-fg: #fff3e6; --ember: #e08a3c;
+    --chat-bg: #0a0806; --chat-edge: #6b5638; --guild-green: #40ff40; --chat-dim: #9c8f7a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15110e; --surface: #211a15; --fg: #efe3cf; --muted: #ab9780; --line: #3f3128;
+  --accent: #a32622; --accent-fg: #fff3e6; --ember: #e08a3c;
+  --chat-bg: #0a0806; --chat-edge: #6b5638; --guild-green: #40ff40; --chat-dim: #9c8f7a; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 32px;
+}
+h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.1; text-wrap: balance; }
+p { margin: 0; }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+
+.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 44px; }
+
+.hero {
+  margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))) 0 calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-bottom: 6px solid var(--ember);
+  padding: 40px max(16px, env(safe-area-inset-right, 0px)) 36px max(16px, env(safe-area-inset-left, 0px));
+}
+.hero-inner { max-width: 760px; margin: 0 auto; display: grid; gap: 10px; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.78rem; opacity: 0.85; }
+.hero h1 { font-size: clamp(3rem, 12vw, 5.6rem); letter-spacing: 0.03em; }
+.tagline { font-size: 1.1rem; max-width: 34em; opacity: 0.92; }
+
+.motd { display: grid; gap: 14px; }
+.motd-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; border-bottom: 2px solid var(--line); padding-bottom: 8px; }
+.motd-head h2 { font-size: 1.6rem; }
+.date { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.chat {
+  background: var(--chat-bg);
+  border: 2px solid var(--chat-edge);
+  border-radius: 3px;
+  padding: 18px 20px;
+  font-family: var(--chat);
+  color: var(--guild-green);
+  font-size: 1.22rem;
+  line-height: 1.45;
+  text-shadow: 1px 1px 0 #000;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.chat .tag { color: var(--guild-green); }
+.chat .who { color: var(--guild-green); font-weight: 700; }
+
+.motd-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--fg); font-weight: 500; }
+.btn:hover { border-color: var(--ember); }
+.btn-primary { background: var(--accent); color: var(--accent-fg); border-color: transparent; font-weight: 700; }
+.btn-primary:hover { filter: brightness(1.12); }
+.btn-sm { padding: 4px 11px; font-size: 0.9rem; }
+.meta { color: var(--muted); font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+.meta .fits { color: var(--fg); font-weight: 700; }
+
+.rolled { display: grid; gap: 10px; }
+.rolled-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+
+.archive h2 { font-size: 1.35rem; border-bottom: 2px solid var(--line); padding-bottom: 8px; margin-bottom: 6px; }
+.archive ol { list-style: none; margin: 0; padding: 0; display: grid; }
+.archive li { display: grid; grid-template-columns: 6.5em 1fr auto; gap: 6px 14px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.archive .day { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 0.92rem; padding-top: 2px; }
+.archive .text { min-width: 0; overflow-wrap: anywhere; }
+
+footer { border-top: 2px solid var(--line); padding-top: 14px; color: var(--muted); font-size: 0.92rem; display: grid; gap: 4px; }
+footer .war { font-family: var(--display); color: var(--fg); font-size: 1.1rem; }
+
+.toast { position: fixed; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 8px 16px; border-radius: 4px; font-size: 0.95rem; z-index: 30; max-width: calc(100% - 32px); }
+
+@media (max-width: 520px) {
+  .chat { font-size: 1.08rem; padding: 14px; }
+  .archive li { grid-template-columns: 1fr auto; }
+  .archive .day { grid-column: 1 / -1; padding: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: border-color 0.15s, filter 0.15s; }
+  .chat.fresh { animation: drop 0.35s ease-out; }
+  @keyframes drop { from { transform: translateY(-4px); opacity: 0.6; } to { transform: none; opacity: 1; } }
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">For the Horde · guild hall</p>
+    <h1>Zuggin</h1>
+    <p class="tagline">No raid on the books right now. Just orcs, friends, and a fresh message of the day every morning. Work work.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="motd" aria-labelledby="motd-title">
+    <div class="motd-head">
+      <h2 id="motd-title">Message of the day</h2>
+      <span class="date" id="today-date"></span>
+    </div>
+    <div class="chat" id="today-chat"><span class="tag">[Guild]</span> <span class="who">[Zuggin]</span>: <span id="today-text">ZUG ZUG.</span></div>
+    <div class="motd-actions">
+      <button class="btn btn-primary" id="copy-today" type="button">Copy for guild chat</button>
+      <button class="btn" id="roll" type="button">Roll a random one</button>
+      <span class="meta" id="today-meta"></span>
+    </div>
+    <div class="rolled" id="rolled" hidden>
+      <p class="rolled-label">Your random roll</p>
+      <div class="chat" id="rolled-chat"><span class="tag">[Guild]</span> <span class="who">[Zuggin]</span>: <span id="rolled-text"></span></div>
+      <div class="motd-actions"><button class="btn btn-sm" id="copy-rolled" type="button">Copy this one</button></div>
+    </div>
+  </section>
+
+  <section class="archive" aria-labelledby="archive-title">
+    <h2 id="archive-title">Earlier this week</h2>
+    <ol id="archive"></ol>
+  </section>
+
+  <footer>
+    <p class="war">Lok'tar ogar. Zug zug.</p>
+    <p id="next-line">A new message drops at midnight your time.</p>
+  </footer>
+</main>
+
+<script type="application/json" id="pastas">[
+"ZUG ZUG. Peon report: gold mine still full, morale still low, orc still hungry. Log in, work work, and if anyone asks why you're standing in Orgrimmar doing nothing, say you're guarding the bank. Lok'tar.",
+"Me not fancy orc. Me orc who reads the dungeon guide AFTER the third wipe. Me orc who vendors the epic by accident. Me still Zuggin. Zug zug.",
+"Daily reminder from the war chief: Grom did not drink demon blood so you could AFK in the Valley of Strength for six hours. Get up. Hit something. Zug zug.",
+"Something need doing? Yes. Everything need doing. Guild bank need gold, rare spawn need killing, and somebody need to stop pulling the whole room. Zug zug.",
+"Roses are red, the Alliance is blue, I ganked a gnome and I'll gank you too. Zug zug, nerds.",
+"Today's forecast in Durotar: hot, dusty, and a 100% chance of an orc yelling ZUG ZUG at a scorpid for no reason. Hydrate. Lok'tar ogar.",
+"Orc wisdom: if the boss has more health than you, hit it more times. If you die, boss's fault. If the guild wipes, hunter's fault. Zug zug.",
+"Me no need addons. Me have big axe and small brain. Me read boss timers with my FACE. Zug.",
+"Every morning the orc wakes up and chooses violence. Every evening the orc wakes up at the spirit healer and chooses violence again. Persistence. Zug zug.",
+"Zuggin house rules: 1. Zug. 2. Zug again. 3. No elves in the guild bank. 4. Whoever took the fishing pole, we know it was you. Work work.",
+"You hear that? That's the sound of every orc in Zuggin typing ZUG ZUG at once and the server crying. Beautiful. For the Horde.",
+"Thrall said strength and honor. Me heard strength and ONIONS. Me now very strong and nobody stands near me in Orgrimmar. Zug zug.",
+"Peon union notice: we are on strike until someone buys the next guild bank tab. Signed, every peon. Work work. Actually no work. Strike. Zug.",
+"Ogre said me can't double jump. Ogre was right. But ogre is now a pile of loot. Zug zug.",
+"Daily reminder that the Zuggin tabard is the best tabard in Azeroth, and anyone who disagrees can meet me behind the Orgrimmar bank. Lok'tar.",
+"Don't think. Zug. Don't plan. Zug. Don't read quest text. Zug. Find yellow exclamation mark, accept, hit thing, turn in. Repeat until max level. The Zuggin way.",
+"Today me learned that yelling your own name and charging in is not a strategy. Tomorrow me will forget. Zug zug.",
+"Ready to work. Okie dokie. Be happy to. Work work. You just read every peon line in the peon voice and you know it. Zug zug.",
+"If you're reading this you owe the guild bank one stack of anything. Me not picky. Me orc. Me eat a stack of linen cloth. Zug zug.",
+"Hunter, this is your reminder to dismiss your pet before the trash pull. It is also last week's reminder. And next week's. Zug zug.",
+"Big orc. Big axe. Big dreams. Small gold. Me farm, me craft, me get undercut by a goblin, me cry, me farm again. Life of orc. Zug zug.",
+"Some orcs are born great. Some orcs achieve greatness. Some orcs walk off the zeppelin tower in Orgrimmar. All orcs Zuggin. Lok'tar.",
+"Me checked the mailbox. Nothing but an outbid letter from a war long forgotten. Me okay. Me fine. Zug zug.",
+"Shaman: need totem? Warrior: need zug. Priest: need mana. Rogue: need loot. Guild leader: need everyone to stop. Zug zug.",
+"Warning: the guild leader has discovered the /roar emote. Please be patient. It will pass. It will not pass. RAAAWR. Zug zug.",
+"Orcs don't do chill. Orcs do zug zug. But today orc sits by the Razor Hill campfire with friends, cooks boar ribs and says nothing for one hour. Then zug zug.",
+"They asked how many orcs it takes to change a torch in Orgrimmar. Me hit them. Torch is fine. Zug zug.",
+"Your hearthstone is not a personality. Your hearthstone is a rock. Use it anyway. Go home. Drink grog. Log in tomorrow. Zug zug.",
+"Lok'tar ogar means victory or death. Zug zug means okay. Together: okay, victory or death, whatever, let's go. That's the guild motto now.",
+"Today is a good day to die. Tomorrow is also a good day to die. But repair first, because me not paying your repair bill again. Zug zug.",
+"Guild check-in. Gear repaired? Zug. Bags full of gray loot? Zug. Did you vendor it? ZUG. Okay, you may now enter Orgrimmar. Lok'tar."
+]</script>
+
+<script>
+(function () {
+  'use strict';
+  var pastas;
+  try { pastas = JSON.parse(document.getElementById('pastas').textContent); } catch (e) { pastas = ['ZUG ZUG. Work work.']; }
+  var LIMIT = 255; // WoW chat message limit
+  var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  // Day number from the viewer's local calendar date, so the pasta flips at local midnight.
+  function dayNumber(d) { return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); }
+  // Fixed shuffle so consecutive days don't step through the list in order.
+  var order = pastas.map(function (_, i) { return i; });
+  (function shuffle() {
+    var seed = 20261105;
+    for (var i = order.length - 1; i > 0; i--) {
+      seed = (seed * 1103515245 + 12345) % 2147483648;
+      var j = seed % (i + 1);
+      var t = order[i]; order[i] = order[j]; order[j] = t;
+    }
+  })();
+  function pastaFor(n) { return pastas[order[((n % order.length) + order.length) % order.length]]; }
+  function fmt(d) { return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()]; }
+
+  var $ = function (id) { return document.getElementById(id); };
+  var todayText = '';
+  var rolledText = '';
+
+  function render() {
+    var now = new Date();
+    var n = dayNumber(now);
+    todayText = pastaFor(n);
+    $('today-text').textContent = todayText;
+    $('today-date').textContent = fmt(now);
+    var len = todayText.length;
+    $('today-meta').innerHTML = len <= LIMIT
+      ? '<span class="fits">' + len + '/' + LIMIT + '</span> characters, fits in one chat line'
+      : len + '/' + LIMIT + ' characters, paste in two parts';
+
+    var list = $('archive');
+    list.innerHTML = '';
+    for (var k = 1; k <= 6; k++) {
+      var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - k);
+      var text = pastaFor(n - k);
+      var li = document.createElement('li');
+      var day = document.createElement('span'); day.className = 'day'; day.textContent = k === 1 ? 'Yesterday' : fmt(d);
+      var p = document.createElement('p'); p.className = 'text'; p.textContent = text;
+      var b = document.createElement('button'); b.className = 'btn btn-sm'; b.type = 'button'; b.textContent = 'Copy';
+      b.setAttribute('aria-label', 'Copy the message from ' + day.textContent);
+      b.addEventListener('click', (function (t) { return function () { copy(t); }; })(text));
+      li.appendChild(day); li.appendChild(p); li.appendChild(b);
+      list.appendChild(li);
+    }
+    updateCountdown();
+  }
+
+  function updateCountdown() {
+    var now = new Date();
+    var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    var mins = Math.max(0, Math.round((midnight - now) / 60000));
+    var h = Math.floor(mins / 60), m = mins % 60;
+    $('next-line').textContent = 'Next message of the day in ' + (h ? h + 'h ' : '') + m + 'm, at midnight your time. ' + pastas.length + ' pastas in rotation.';
+  }
+
+  var toastTimer;
+  function toast(msg) {
+    var old = document.querySelector('.toast'); if (old) old.remove();
+    var t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status'); t.textContent = msg;
+    document.body.appendChild(t);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.remove(); }, 2400);
+  }
+  function copy(text) {
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      ta.remove();
+      toast(ok ? 'Copied. Paste it in guild chat.' : 'Copy failed. Select the text and copy it by hand.');
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { toast('Copied. Paste it in guild chat.'); }, fallback);
+    } else fallback();
+  }
+
+  $('copy-today').addEventListener('click', function () { copy(todayText); });
+  $('copy-rolled').addEventListener('click', function () { copy(rolledText); });
+  $('roll').addEventListener('click', function () {
+    var pick;
+    do { pick = pastas[Math.floor(Math.random() * pastas.length)]; } while (pastas.length > 2 && (pick === todayText || pick === rolledText));
+    rolledText = pick;
+    $('rolled-text').textContent = pick;
+    $('rolled').hidden = false;
+    var c = $('rolled-chat'); c.classList.remove('fresh'); void c.offsetWidth; c.classList.add('fresh');
+  });
+
+  render();
+  var lastDay = dayNumber(new Date());
+  setInterval(function () {
+    var d = dayNumber(new Date());
+    if (d !== lastDay) { lastDay = d; render(); } else updateCountdown();
+  }, 30000);
+})();
+</script>
+</body>
+</html>
